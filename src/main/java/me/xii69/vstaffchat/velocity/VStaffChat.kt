@@ -51,18 +51,19 @@ class VStaffChat @Inject constructor(
         if (!event.result.isAllowed) return
         if (!event.player.hasPermission("vstaffchat.send")) return
 
-        val message = event.message
+        var message = event.message
 
         if (toggledChat.contains(event.player.uniqueId)) {
+            event.result = PlayerChatEvent.ChatResult.denied()
             sendChat(message, event.player)
             return
         }
+
         if (!message.startsWith(Config.prefix)) return
 
         event.result = PlayerChatEvent.ChatResult.denied()
 
-        message.removePrefix(Config.prefix)
-        while (message.startsWith(" ")) message.removePrefix(" ")
+        message = message.replace(Config.prefix, "").trimStart()
 
         if (message != "") sendChat(message, event.player)
     }
@@ -73,8 +74,8 @@ class VStaffChat @Inject constructor(
             .forEach {
                 it.sendMessage(
                     Config.format
-                        .replace("[PREFIX]", Config.prefix)
-                        .replace("[USERNAME]", it.username)
+                        .replace("[PREFIX]", Config.chatPrefix)
+                        .replace("[USERNAME]", sender.username)
                         .replace("[MESSAGE]", message)
                         .component()
                 )
