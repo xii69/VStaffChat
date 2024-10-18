@@ -1,0 +1,10 @@
+{
+  "id": "${slug}",
+  "name": "${name}",
+  "version": "${version}",
+  "description": "${description}",
+  "authors": [
+    "${author}"
+  ],
+  "main": "${velocityMain}"
+}
