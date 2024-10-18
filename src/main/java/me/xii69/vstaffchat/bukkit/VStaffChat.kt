@@ -15,7 +15,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.UUID
 
-lateinit var adventure: BukkitAudiences
+lateinit var bukkitAdventure: BukkitAudiences
 
 class VStaffChat() : JavaPlugin(), Listener, CommandExecutor {
     private lateinit var metrics: Metrics
@@ -23,8 +23,9 @@ class VStaffChat() : JavaPlugin(), Listener, CommandExecutor {
 
     override fun onEnable() {
         metrics = Metrics(this, 23666)
+        bukkitAdventure = BukkitAudiences.create(this)
         getCommand("vstaffchat")!!.setExecutor(this)
-        adventure = BukkitAudiences.create(this);
+        server.pluginManager.registerEvents(this, this)
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
