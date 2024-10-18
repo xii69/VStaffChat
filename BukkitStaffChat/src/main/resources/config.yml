@@ -1,7 +1,0 @@
-databases:
-  chat:
-    type: redis
-    credentials:
-      host:
-      port:
-      password: ""
