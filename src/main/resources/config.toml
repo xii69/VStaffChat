@@ -1,0 +1,10 @@
+[options]
+prefix = "#"
+
+[messages]
+prefix = "<gradient:#03e100:#10edfb><b>VStaffChat<reset> <dark_gray>| <reset>"
+format = "[PREFIX] <gradient:#ff7733:#f6ff33>[USERNAME]<reset> <green>»<reset> <gradient:#3399ff:#33e0ff>[MESSAGE]"
+toggle_on = "<gradient:#03e100:#10edfb>Now your messages will be sent as staff chat"
+toggle_off = "<gradient:#03e100:#10edfb>Your messages will no longer be sent as staff chat"
+only_in_game = "<gradient:#fb1010:#ff5a5a>This command is only for in-game players"
+no_permission = "<gradient:#fb1010:#ff5a5a>You don't have permission to perform this action"
