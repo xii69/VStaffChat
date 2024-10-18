@@ -15,8 +15,6 @@ import me.xii69.vstaffchat.velocity.Metrics.Factory
 import java.nio.file.Path
 import java.util.UUID
 
-lateinit var vstaffchat: VStaffChat
-
 class VStaffChat @Inject constructor(
     val server: ProxyServer,
     val metricsFactory: Factory,
@@ -26,7 +24,6 @@ class VStaffChat @Inject constructor(
 
     @Subscribe
     fun onProxyInitialization(event: ProxyInitializeEvent) {
-        vstaffchat = this
         metricsFactory.make(this, 23664)
         Config(dataDirectory, javaClass).load()
         server.commandManager.register(server.commandManager.metaBuilder("vstaffchat").aliases("vsc", "sc").build(), this)
@@ -69,16 +66,14 @@ class VStaffChat @Inject constructor(
     }
 
     fun sendChat(message: String, sender: Player) {
-        server.allPlayers
-            .filter { it.hasPermission("vstaffchat.receive") }
-            .forEach {
-                it.sendMessage(
-                    Config.format
-                        .replace("[PREFIX]", Config.chatPrefix)
-                        .replace("[USERNAME]", sender.username)
-                        .replace("[MESSAGE]", message)
-                        .component()
-                )
-            }
+        server.allPlayers.filter { it.hasPermission("vstaffchat.receive") }.forEach {
+            it.sendMessage(
+                Config.format
+                    .replace("[PREFIX]", Config.chatPrefix)
+                    .replace("[USERNAME]", sender.username)
+                    .replace("[MESSAGE]", message)
+                    .component()
+            )
+        }
     }
 }

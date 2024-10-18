@@ -3,3 +3,8 @@ version: "${version}"
 author: "${author}"
 main: "${bukkitMain}"
 description: "${description}"
+commands:
+  vstaffchat:
+    aliases:
+      - vsc
+      - sc
