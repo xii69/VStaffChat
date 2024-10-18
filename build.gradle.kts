@@ -21,6 +21,7 @@ repositories {
 
 dependencies {
     implementation("com.moandjiezana.toml:toml4j:0.7.2")
+    implementation("net.kyori:adventure-text-minimessage:4.17.0")
     implementation("net.kyori:adventure-platform-bukkit:4.3.4")
     implementation("net.kyori:adventure-platform-bungeecord:4.3.4")
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")

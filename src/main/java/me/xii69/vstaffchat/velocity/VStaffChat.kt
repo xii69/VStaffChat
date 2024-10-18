@@ -45,20 +45,15 @@ class VStaffChat @Inject constructor(
 
     @Subscribe
     fun onPlayerChat(event: PlayerChatEvent) {
-        if (!event.result.isAllowed) return
-        if (!event.player.hasPermission("vstaffchat.send")) return
-
         var message = event.message
 
-        if (toggledChat.contains(event.player.uniqueId)) {
-            event.result = PlayerChatEvent.ChatResult.denied()
-            sendChat(message, event.player)
-            return
-        }
-
+        if (!event.result.isAllowed) return
         if (!message.startsWith(Config.prefix)) return
+        if (!event.player.hasPermission("vstaffchat.send")) return
 
         event.result = PlayerChatEvent.ChatResult.denied()
+
+        if (toggledChat.contains(event.player.uniqueId)) return sendChat(message, event.player)
 
         message = message.replace(Config.prefix, "").trimStart()
 
