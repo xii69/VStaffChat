@@ -24,6 +24,7 @@ class VStaffChat() : JavaPlugin(), Listener, CommandExecutor {
     override fun onEnable() {
         metrics = Metrics(this, 23666)
         bukkitAdventure = BukkitAudiences.create(this)
+        Config(dataFolder.toPath(), this.javaClass).load()
         getCommand("vstaffchat")!!.setExecutor(this)
         server.pluginManager.registerEvents(this, this)
     }

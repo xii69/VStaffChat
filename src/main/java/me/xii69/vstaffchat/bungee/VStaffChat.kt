@@ -22,6 +22,7 @@ class VStaffChat() : Plugin(), Listener {
     override fun onEnable() {
         metrics = Metrics(this, 23665)
         bungeeAdventure = BungeeAudiences.create(this)
+        Config(dataFolder.toPath(), this.javaClass).load()
         proxy.pluginManager.registerListener(this, this)
         proxy.pluginManager.registerCommand(this, object : Command("vstaffchat", "vsc", "sc") {
             override fun execute(sender: CommandSender, args: Array<out String>) = onCommand(sender, args)
