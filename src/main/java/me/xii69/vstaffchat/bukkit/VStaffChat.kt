@@ -57,12 +57,16 @@ class VStaffChat() : JavaPlugin(), Listener, CommandExecutor {
         if (event.isCancelled) return
 
         var message = event.message
-        if (!message.startsWith(Config.prefix)) return
         if (!event.player.hasPermission("vstaffchat.send")) return
 
-        event.isCancelled = true
+        if (toggledChat.contains(event.player.uniqueId)) {
+            event.isCancelled = true
+            return sendChat(message, event.player)
+        }
 
-        if (toggledChat.contains(event.player.uniqueId)) return sendChat(message, event.player)
+        if (!message.startsWith(Config.prefix)) return
+
+        event.isCancelled = true
 
         message = message.replace(Config.prefix, "").trimStart()
 

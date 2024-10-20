@@ -45,14 +45,17 @@ class VStaffChat() : Plugin(), Listener {
         var message = event.message
         val player = event.sender as ProxiedPlayer
 
-        if (event.isCommand) return
-        if (event.isCancelled) return
-        if (!message.startsWith(Config.prefix)) return
+        if (event.isCommand || event.isCancelled) return
         if (!player.hasPermission("vstaffchat.send")) return
 
-        event.isCancelled = true
+        if (toggledChat.contains(player.uniqueId)) {
+            event.isCancelled = true
+            return sendChat(message, player)
+        }
 
-        if (toggledChat.contains(player.uniqueId)) return sendChat(message, player)
+        if (!message.startsWith(Config.prefix)) return
+
+        event.isCancelled = true
 
         message = message.replace(Config.prefix, "").trimStart()
 
